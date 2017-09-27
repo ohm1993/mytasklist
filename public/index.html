@@ -1,0 +1,74 @@
+<!DOCTYPE>
+<html>
+  <head>
+      <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+      <title>Cotact LIst</title>
+  </head>
+  <body>
+  <div class="container" ng-app="myApp">
+      <h1>Contact List App</h1>
+      <table class="table" ng-controller="myCtrl">
+          <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Number</th>
+                <th>Action</th>
+                <th>&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                    <th>
+                        <ng-form id="test" name="test">
+                            <div class="form-group">
+                               <input type="text" name="contact_name"  class="form-control" ng-model="contact.name" required/>
+                               <span style="color:red" ng-show="test.contact_name.$dirty && test.contact_name.$invalid">
+                                            <span ng-show="test.contact_name.$error.required">Field is required</span>
+                               </span>
+                            </div>
+                        </ng-form>
+                    </th>
+                      <th>
+                          <ng-form id="test1" name="test1">
+                            <div class="form-group">
+                                <input type="email" name="contact_email" class="form-control" ng-model="contact.email" required>
+                                <span style="color:red" ng-show="test1.contact_email.$dirty && test1.contact_email.$invalid">
+                                  <span class="error" ng-show="test1.contact_email.$error.required">Email must be required</span>
+                                  <span ng-show="test1.contact_email.$error.email">Unvalid email</span>
+                                </span>
+                            </div>
+                           </ng-form>
+                      </th>
+                      <th>
+                          <ng-form id="test2" name="test2">
+                             <input type="text" name="contact_number" class="form-control" ng-model="contact.number" ng-minlength="10" ng-maxlength="10" required>
+                             <span style="color:red" ng-show="test2.contact_number.$dirty && test2.contact_number.$invalid">
+                                 <span ng-show="test2.contact_number.$error.minlength || test2.contact_number.$error.maxlength">Minimum 10 digits number</span>
+                                 <span class="error" ng-show="test2.contact_number.$error.required">Number must required</span>
+                             </span>
+                          </ng-form>
+                      </th>
+                      <th><button class="btn btn-primary" ng-click="addContact()">Add Contacts</button>
+                       <button type="button" class="btn btn-info" ng-click="update()">update</button></th>
+
+
+              </tr>
+              <tr ng-repeat="contact in contactList">
+                  <th>{{contact.name}}</th>
+                  <th>{{contact.email}}</th>
+                  <th>{{contact.number}}</th>
+                  <th><button type="button" class="btn btn-success" ng-click="edit(contact._id)">Edit</button>
+                  <button type="button" class="btn btn-danger" ng-click="delete(contact._id)">Delete</button></th>
+              </tr>
+          </tbody>
+      </table>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+  <script src="controllers/controller.js"></script>
+  </body>
+</html>
